@@ -11,7 +11,8 @@ def main():
         print(s)
     ss =s.split('\n')
     words = []
-    for line in ss:
+    for i in range(len(ss)):
+        line = ss[i]
         parts = line.split(',')
         if not parts[0]:
             continue
@@ -24,7 +25,12 @@ def main():
             break
         meaning =parts[4]
         meaning=addLink(meaning,words)
-        createHtml(t,word,pro,meaning)
+        if i<len(ss)-1:
+            word_next=ss[i+1].split(',')[1]
+            createHtml(t,word,pro,meaning,word_next)
+        else:
+            createHtml(t,word,pro,meaning,'')
+
     print(words)
 
 
@@ -40,9 +46,11 @@ def addLink(meaning,words):
 
 
 
-def createHtml(t,word,pro,meaning):
+def createHtml(t,word,pro,meaning,word_next):
     with open ('../word/{word}.html'.format(word=word),'w') as f:
         html = t.replace('{word}',word).replace('{pro}',pro).replace('{meaning}',meaning)
+        if word_next:
+            html = html.replace('{word_next}',word_next)
         f.write(html)
     
 
