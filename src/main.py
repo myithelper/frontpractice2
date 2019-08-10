@@ -1,7 +1,7 @@
 def main():
     print('tt')
 
-    with open ('../template.html') as f:
+    with open ('../word/template.html') as f:
         t=f.read()
         print(t)
 
@@ -42,7 +42,7 @@ def addLink(meaning,words):
 
 def createHtml(t,word,pro,meaning):
     with open ('../word/{word}.html'.format(word=word),'w') as f:
-        html = t.format(word=word,pro=pro,meaning=meaning)
+        html = t.replace('{word}',word).replace('{pro}',pro).replace('{meaning}',meaning)
         f.write(html)
     
 
