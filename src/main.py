@@ -10,8 +10,6 @@ def main():
         s = f.read()
         print(s)
     ss =s.split('\n')
-    print(ss)
-    print(ss[1])
     words = []
     for line in ss:
         parts = line.split(',')
@@ -25,12 +23,22 @@ def main():
         if not pro:
             break
         meaning =parts[4]
+        meaning=addLink(meaning,words)
         createHtml(t,word,pro,meaning)
     print(words)
 
 
 
-        
+    
+def addLink(meaning,words):
+    for word in words:
+        if word in meaning:
+            link='<a href={word}.html>{word}</a>'.format(word=word)
+            meaning=meaning.replace(word,link)
+    return meaning
+
+
+
 
 def createHtml(t,word,pro,meaning):
     with open ('../word/{word}.html'.format(word=word),'w') as f:
