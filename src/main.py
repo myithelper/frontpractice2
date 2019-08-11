@@ -9,7 +9,7 @@ def main():
 
     with open('dictionary.txt',encoding="utf-16") as f:
         s = f.read()
-        print(s)
+        #print(s)
     ss =s.split('\n')
     words = []
     infos=[]
@@ -33,10 +33,6 @@ def main():
 
 
     words.reverse()        
-    print('aaaaaaaaaaaaaaaaaaaaa')
-    print(words)
-    print('bbbbbbbbbbbbbbbbbbb')
-    print(infos)
     for i in range(len(infos)):
         if i==0:
             print('hh')
