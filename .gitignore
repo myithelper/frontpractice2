@@ -1,3 +1,6 @@
 src/dictionary.xlsx
 src/dictionary.txt
 src/test.py
+settings.yaml
+credentials.json
+fileid.txt
