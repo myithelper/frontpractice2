@@ -1,3 +1,5 @@
+import pandas as pd
+
 def main():
     print('tt')
     space = '	'
@@ -6,36 +8,24 @@ def main():
         t=f.read()
         print(t)
 
+    df=pd.read_excel('./dictionary.xlsx', sheet_name='dictionary', header=0)
+    print(df)
 
-    with open('dictionary.txt',encoding="utf-16") as f:
-        s = f.read()
-        #print(s)
-    ss =s.split('\n')
+    df=df.dropna(axis = 0)
     words = []
     infos=[]
-    for i in range(len(ss)):
-        line = ss[i]
-        parts = line.split(space)
-        #parts = line.split('	')
-
-        
-        if parts[0]=='index':
-            continue
-
-        pro = parts[4]
-        if not pro:
-            continue
-        word = parts[2]
-        words.append(word)
-        meaning =parts[5]
-        infos.append([word,pro,meaning])
+    for idx, row in df.iterrows():
+        #if not pd.isnull(row.pronouncation):
+        #    continue
+        words.append(row.word)
+        infos.append([row.word,row.pronouncation,row.meaning])
 
 
 
-    words.reverse()        
+    words.reverse()  
+    print(infos)      
     for i in range(len(infos)):
         if i==0:
-            print('hh')
             createHtml(t,infos[i][0],infos[i][1],infos[i][2],words,infos[i+1][0],'#')
         elif i <len(infos)-1:
 
