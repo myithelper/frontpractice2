@@ -38,13 +38,15 @@ def main():
     print('bbbbbbbbbbbbbbbbbbb')
     print(infos)
     for i in range(len(infos)):
-        print(i)
-        if i <len(infos)-1:
+        if i==0:
+            print('hh')
+            createHtml(t,infos[i][0],infos[i][1],infos[i][2],words,infos[i+1][0],'#')
+        elif i <len(infos)-1:
 
-            createHtml(t,infos[i][0],infos[i][1],infos[i][2],words,infos[i+1][0])
+            createHtml(t,infos[i][0],infos[i][1],infos[i][2],words,infos[i+1][0],infos[i-1][0])
         else:
 
-            createHtml(t,infos[i][0],infos[i][1],infos[i][2],words,'')
+            createHtml(t,infos[i][0],infos[i][1],infos[i][2],words,'#',infos[i-1][0])
 
 
 
@@ -68,12 +70,14 @@ def addLink(word,words):
 
 
 
-def createHtml(t,word,pro,meaning,words,word_next):
+def createHtml(t,word,pro,meaning,words,word_next,word_before):
     with open ('../word/{word}.html'.format(word=word),'w') as f:
-        word=addLink(word,words)
-        html = t.replace('{word}',word).replace('{pro}',pro).replace('{meaning}',meaning)
+        word_link=addLink(word,words)
+        html = t.replace('{word}',word).replace('{pro}',pro).replace('{meaning}',meaning).replace('{word_link}',word_link)
         if word_next:
             html = html.replace('{word_next}',word_next)
+            html = html.replace('{word_before}',word_before)
+       
         f.write(html)
     
 
