@@ -1,8 +1,14 @@
 import pandas as pd
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
+import argparse
 
 def main():
+    parser = argparse.ArgumentParser(description='dictionary parameteres')
+    parser.add_argument('--m', type=int, default=0)
+    parser.add_argument('--n', type=int, default=0)
+    m= parser.parse_args().m
+    n=parser.parse_args().n
     downDict()
 
     with open('../word/template.html') as f:
@@ -12,6 +18,10 @@ def main():
     print(df)
 
     df = df.dropna(axis=0)
+    if n>0:
+        df=df[m:n]
+    print(df)
+
     words = []
     infos = []
     for idx, row in df.iterrows():
